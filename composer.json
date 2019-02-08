@@ -1,0 +1,12 @@
+{
+  "name": "Jsmithgr/328/hike",
+  "authors": [
+    {
+      "name": "Jordan Smith",
+      "email": "jsmith66@mail.greenriver.edu"
+    }
+  ],
+  "require":{
+    "bcosca/fatfree-core": "dev-master"
+  }
+}
