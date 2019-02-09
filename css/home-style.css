@@ -1,6 +1,21 @@
 body {
-    background: url("../images/hike-background.jpg") no-repeat center center fixed;
+    background: url("../images/hike-bg.jpg") no-repeat center center fixed;
     background-size: cover;
     height: 100%;
     width: 100%;
+}
+
+.container {
+    height: 100vh;
+}
+
+#site-name{
+    font-family: 'Rubik', sans-serif;
+    font-size: 150px;
+    color: ghostwhite;
+}
+
+.tagline {
+    font-size: 40px;
+    color: ghostwhite;
 }
