@@ -31,6 +31,7 @@ $f3->route('GET|POST /', function ($f3)
 
         if(isset($_POST['fname']))
         {
+            print_r($_POST);
             $fname = $_POST['fname'];
             if(validName($fname))
             {
@@ -99,7 +100,7 @@ $f3->route('GET|POST /', function ($f3)
             $f3->reroute("/test");
         }
 
-
+        print_r($_POST);
     //VALIDATE LOG IN INFORMATION IS IN DATABASE
         //code will go here
 

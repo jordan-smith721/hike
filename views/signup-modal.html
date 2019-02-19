@@ -8,7 +8,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post" action="#">
+                <form id="signupForm" method="post" action="#">
                     <div class="form-group">
                         <label for="fname" class="col-form-label">First Name:</label>
                         <check if="{{ isset(@errors['first']) }}">
@@ -45,7 +45,7 @@
                         <input type="password" class="form-control" id="confirmPass" name="confirmPass">
                     </div>
                     <div class="modal-footer form-group">
-                        <button type="button" class="btn btn-secondary">Close</button>
+                        <button type="button" data-dismiss="modal" class="btn btn-secondary">Close</button>
                         <input type="submit" name="signup" value="Sign Up" class="btn btn-primary">
                     </div>
                 </form>
