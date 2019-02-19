@@ -1,0 +1,90 @@
+<include href="views/header.html"></include>
+<body>
+
+<div id="head-img" class="jumbotron h-25">
+    <h1>BANNER IMAGE HERE</h1>
+</div>
+
+<div class="container">
+    <div class="row">
+
+        <!--Pills-->
+        <ul class="nav nav-tabs w-100 justify-content-around mb-3" id="tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="myHikesTab" data-toggle="tab" href="#myHikes" role="tab">My Hikes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="myGoalsTab" data-toggle="pill" href="#myGoals" role="tab">My Goals</a>
+            </li>
+        </ul>
+
+        <!--Tabs-->
+        <div class="tab-content w-100" id="tabContent">
+            <!--Hike tracking-->
+            <div class="tab-pane fade show active container" id="myHikes" role="tabpanel">
+                <div class="row h-50 mx-auto" id="hikeList">
+
+                    <!--Table-->
+                    <div class="table-responsive justify-content-between">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Trail Name</th>
+                                    <th scope="col">Length</th>
+                                    <th scope="col">Elevation Gain</th>
+                                    <th scope="col">Location</th>
+                                    <th scope="col">Difficulty</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Granite Mountain</td>
+                                    <td>8.6 Miles</td>
+                                    <td>3800ft.</td>
+                                    <td>Squalmie Region</td>
+                                    <td>Moderate</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="row float-right">
+                    <button type="button" class="btn btn-primary btn-lg align-bottom">Add a Hike</button>
+                </div>
+
+            </div><!--End myHikes-->
+
+            <!--Goals-->
+            <div class="tab-pane fade" id="myGoals" role="tabpanel">
+
+                <!--Progress bars-->
+                <div class="container w-100 h-100">
+                    <div class="row my-3">
+                        <h5 class="h5">Complete 5 hikes</h5>
+                        <div class="progress w-100">
+                            <div class="progress-bar w-25">1/5</div>
+                        </div>
+                    </div>
+
+                    <div class="row my-3">
+                        <h5 class="h5">10,000 ft. Elevation Gain</h5>
+                        <div class="progress w-100">
+                            <div class="progress-bar w-50">5,000/10,000</div>
+                        </div>
+                    </div>
+
+
+                    <div class="row float-right">
+                        <button type="button" class="btn btn-primary btn-lg">Add a Goal</button>
+                    </div>
+
+                </div><!--End container-->
+
+            </div>
+        </div><!--End content-->
+    </div><!--End row-->
+</div><!--End container-->
+
+</body>
+</html>

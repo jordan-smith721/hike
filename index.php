@@ -112,5 +112,13 @@ $f3->route('GET|POST /test', function ($f3)
     echo $template->render('views/testpage.html');
 });
 
+$f3->route('GET|POST /landing', function ($f3)
+{
+    $template = new Template();
+    echo $template->render('views/landing.html');
+});
+
+
+
 //Run fat free
 $f3->run();
