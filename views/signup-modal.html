@@ -8,41 +8,31 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="signupForm" method="post" action="#">
+                <form id="signupForm" method="post" action="#" novalidate>
                     <div class="form-group">
                         <label for="fname" class="col-form-label">First Name:</label>
-                        <check if="{{ isset(@errors['first']) }}">
-                            <br><span>{{ @errors ['first']}}</span>
-                        </check>
-                        <input type="text" class="form-control" id="fname" name="fname">
+                        <span id="fnameError" class="d-none small text-danger">First name is invalid</span>
+                        <input type="text" class="form-control" id="fname" name="fname" required>
                     </div>
                     <div class="form-group">
                         <label for="lname" class="col-form-label">Last Name:</label>
-                        <check if="{{ isset(@errors['last']) }}">
-                            <br><span>{{ @errors ['last']}}</span>
-                        </check>
-                        <input class="form-control" id="lname" name="lname">
+                        <span id="lnameError" class="d-none small text-danger">Last name is invalid</span>
+                        <input class="form-control" id="lname" name="lname" required>
                     </div>
                     <div class="form-group">
                         <label for="signUpEmail" class="col-form-label">Email:</label>
-                        <check if="{{ isset(@errors['email']) }}">
-                            <br><span>{{ @errors ['email']}}</span>
-                        </check>
-                        <input class="form-control" id="signUpEmail" name="signUpEmail">
+                        <span id="emailError" class="d-none small text-danger">Please enter a valid email (example@example.com)</span>
+                        <input class="form-control" id="signUpEmail" name="signUpEmail" required>
                     </div>
                     <div class="form-group">
                         <label for="signPassword" class="col-form-label">Password:</label>
-                        <check if="{{ isset(@errors['password']) }}">
-                            <br><span>{{ @errors ['password']}}</span>
-                        </check>
-                        <input type="password" class="form-control" id="signPassword" name="signPassword">
+                        <span id="passwordError" class="d-none small text-danger">Password must be at least 8 characters long</span>
+                        <input type="password" class="form-control" id="signPassword" name="signPassword" required>
                     </div>
                     <div class="form-group">
                         <label for="confirmPass" class="col-form-label">Confirm Password:</label>
-                        <check if="{{ isset(@errors['confirmPass']) }}">
-                            <span>{{ @errors ['confirmPass']}}</span>
-                        </check>
-                        <input type="password" class="form-control" id="confirmPass" name="confirmPass">
+                        <span id="confirmError" class="d-none small text-danger">Passwords do not match </span>
+                        <input type="password" class="form-control" id="confirmPass" name="confirmPass" required>
                     </div>
                     <div class="modal-footer form-group">
                         <button type="button" data-dismiss="modal" class="btn btn-secondary">Close</button>
