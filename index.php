@@ -12,6 +12,13 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 require_once 'vendor/autoload.php';
+require_once 'model/db-functions.php';
+
+//connect to database
+$dbh = connect();
+if(!$dbh){
+    exit;
+}
 
 //Create an instance of the Base class
 $f3 = Base::instance();
@@ -28,6 +35,10 @@ $f3->route('GET|POST /', function ($f3)
 
     //VALIDATE SIGN UP FORM
         $isValid = false;
+        $fname="";
+        $lname="";
+        $email="";
+        $password="";
 
         if(isset($_POST['fname']))
         {
@@ -84,6 +95,7 @@ $f3->route('GET|POST /', function ($f3)
                     $f3 -> set("errors['confirmPass']","Passwords do not match.");
                 }
                 else{
+                    $password = SHA1($password);
                     $isValid = true;
                 }
             }
@@ -96,11 +108,21 @@ $f3->route('GET|POST /', function ($f3)
 
         if($isValid)
         {
-            $f3->reroute("/test");
+            insertUsers($fname,$lname,$email,$password);
+            $f3->reroute("/landing");
         }
 
     //VALIDATE LOG IN INFORMATION IS IN DATABASE
-        //code will go here
+        if(isset($_POST['email']) && isset($_POST['password']))
+        {
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+            if(checkLogIn($email,$password))
+            {
+                $f3->reroute("/landing");
+            }
+
+        }
 
     echo Template::instance()->render('views/home.html');
 });
@@ -113,6 +135,8 @@ $f3->route('GET|POST /test', function ($f3)
 
 $f3->route('GET|POST /landing', function ($f3)
 {
+
+
     $template = new Template();
     echo $template->render('views/landing.html');
 });
