@@ -12,6 +12,7 @@ class User
     private $_fname;
     private $_lname;
     private $_email;
+    private $_user_id;
 
     /**
      * User constructor.
@@ -19,11 +20,29 @@ class User
      * @param $_lname
      * @param $_email
      */
-    public function __construct($_fname, $_lname, $_email)
+    public function __construct($_fname, $_lname, $_email, $_user_id)
     {
         $this->_fname = $_fname;
         $this->_lname = $_lname;
         $this->_email = $_email;
+        $this->_user_id = $_user_id;
+
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUserId()
+    {
+        return $this->_user_id;
+    }
+
+    /**
+     * @param mixed $user_id
+     */
+    public function setUserId($user_id)
+    {
+        $this->_user_id = $user_id;
     }
 
     /**

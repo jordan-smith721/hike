@@ -1,6 +1,6 @@
 <?php
 
-require_once ('/home/beshegre/config.php');
+require_once ('/home/jsmithgr/config.php');
 
 function connect(){
     try{
@@ -57,7 +57,7 @@ function getHikeNames()
 
     $statement = $dbh->prepare($sql);
     $statement-> execute();
-    $result = $statement->fetch(PDO::FETCH_ASSOC);
+    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
     return $result;
 }
@@ -71,6 +71,20 @@ function getHikeDetails($trailName)
 
     $statement = $dbh->prepare($sql);
     $statement->bindParam(':trailName',$trailName,PDO::PARAM_STR);
+    $statement-> execute();
+    $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+    return $result;
+}
+
+function getUserId($email)
+{
+    global $dbh;
+
+    $sql = "SELECT user_id FROM users WHERE email = :email";
+
+    $statement = $dbh->prepare($sql);
+    $statement->bindParam(':email',$email,PDO::PARAM_STR);
     $statement-> execute();
     $result = $statement->fetch(PDO::FETCH_ASSOC);
 

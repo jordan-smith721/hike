@@ -14,9 +14,9 @@ class PremiumUser extends User
      * PremiumUser constructor.
      * @param $_goals
      */
-    public function __construct($fname, $lname, $email)
+    public function __construct($fname, $lname, $email, $user_id)
     {
-        parent::__construct($fname,$lname,$email);
+        parent::__construct($fname,$lname,$email,$user_id);
     }
 
     /**

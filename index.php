@@ -20,6 +20,8 @@ if(!$dbh){
     exit;
 }
 
+session_start();
+
 //Create an instance of the Base class
 $f3 = Base::instance();
 
@@ -109,6 +111,24 @@ $f3->route('GET|POST /', function ($f3)
         if($isValid)
         {
             insertUsers($fname,$lname,$email,$password);
+
+            //create new member object
+            if(isset($_POST['premium']))
+            {
+                $user_id = getUserId($email);
+
+                $member = new PremiumUser($fname, $lname, $email, $user_id);
+                $_SESSION['member'] = $member;
+            }
+            else
+            {
+                $user_id = getUserId($email);
+
+                $member = new User($fname, $lname, $email, $user_id);
+                $_SESSION['member'] = $member;
+            }
+
+
             $f3->reroute("/landing");
         }
 
@@ -119,6 +139,7 @@ $f3->route('GET|POST /', function ($f3)
             $password = $_POST['password'];
             if(checkLogIn($email,$password))
             {
+
                 $f3->reroute("/landing");
             }
 
@@ -135,6 +156,17 @@ $f3->route('GET|POST /test', function ($f3)
 
 $f3->route('GET|POST /landing', function ($f3)
 {
+    $hikeNames = getHikeNames();
+    $f3->set('hikeNames', $hikeNames);
+    $member = $_SESSION['member'];
+    $user_id = $member->getUserId();
+
+    if(isset($_POST['trailName']))
+    {
+        //add hike to database
+
+
+    }
 
 
     $template = new Template();

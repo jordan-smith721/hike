@@ -12,7 +12,9 @@
                     <div class="form-group">
                         <label for="trailName" class="col-form-label">Trail Name:</label>
                         <select class="form-control" id="trailName" name="trailName">
-                            <!--repeat group trail names-->
+                            <repeat group="{{ @hikeNames }}" value="{{ @name }} ">
+                                <option> {{ @name['trailName'] }}</option>
+                            </repeat>
                         </select>
                     </div>
                     <div class="modal-footer">
