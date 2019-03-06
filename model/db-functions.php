@@ -48,3 +48,32 @@ function checkLogIn($email,$password)
 
     return $result;
 }
+
+function getHikeNames()
+{
+    global $dbh;
+
+    $sql = "SELECT trailName FROM hikes";
+
+    $statement = $dbh->prepare($sql);
+    $statement-> execute();
+    $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+    return $result;
+}
+
+function getHikeDetails($trailName)
+{
+    global $dbh;
+
+    $sql = "SELECT * FROM hikes WHERE trailName = :trailName";
+
+
+    $statement = $dbh->prepare($sql);
+    $statement->bindParam(':trailName',$trailName,PDO::PARAM_STR);
+    $statement-> execute();
+    $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+    return $result;
+}
+
