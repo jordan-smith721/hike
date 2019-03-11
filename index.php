@@ -132,13 +132,27 @@ $f3->route('GET|POST /', function ($f3)
             $f3->reroute("/landing");
         }
 
-    //VALIDATE LOG IN INFORMATION IS IN DATABASE
+        //VALIDATE LOG IN INFORMATION IS IN DATABASE
         if(isset($_POST['email']) && isset($_POST['password']))
         {
             $email = $_POST['email'];
             $password = $_POST['password'];
             if(checkLogIn($email,$password))
             {
+                $member = getMember($email);
+
+                //save member into session
+                if($member['premium'] == 1)
+                {
+                    $member = new PremiumUser($member['fName'], $member['lName'], $member['email'], $member['user_id']);
+
+                }
+                else
+                {
+                    $member = new User($member['fName'], $member['lName'], $member['email'], $member['user_id']);
+                }
+
+                $_SESSION['member'] = $member;
 
                 $f3->reroute("/landing");
             }
@@ -161,13 +175,19 @@ $f3->route('GET|POST /landing', function ($f3)
     $member = $_SESSION['member'];
     $user_id = $member->getUserId();
 
+
     if(isset($_POST['trailName']))
     {
         //add hike to database
-
-
+        $hikeDetails = getHikeDetails($_POST['trailName']);
+        $hike_id = $hikeDetails['hike_id'];
+        insertHike($user_id, $hike_id);
     }
 
+
+    //get information to generate table
+    $tableInfo = generateHikeTable($user_id);
+    $f3->set('tableInfo', $tableInfo);
 
     $template = new Template();
     echo $template->render('views/landing.html');

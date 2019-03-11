@@ -37,13 +37,18 @@
                                 </tr>
                             </thead>
                             <tbody>
+
+                            <repeat group="{{ @tableInfo }}" value="{{ @trail }}">
                                 <tr>
-                                    <td>Granite Mountain</td>
-                                    <td>8.6 Miles</td>
-                                    <td>3800ft.</td>
-                                    <td>Squalmie Region</td>
-                                    <td>Moderate</td>
+                                    <td>{{ @trail['trailName'] }}</td>
+                                    <td>{{ @trail['length'] }} Miles</td>
+                                    <td>{{ @trail['elevation'] }} ft.</td>
+                                    <td>{{ @trail['Location'] }}</td>
+                                    <td>{{ @trail['difficulty'] }}</td>
                                 </tr>
+                            </repeat>
+
+
                             </tbody>
                         </table>
                     </div>

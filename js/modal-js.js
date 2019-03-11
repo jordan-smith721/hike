@@ -15,6 +15,10 @@ $(document).ready(function()
     var confirmError = $('#confirmError');
 
 
+    /*************************************************
+     SIGNUP MODAL VALIDATION
+    **************************************************/
+
     $(fname).on("blur", function ()
     {
         isValid = true;
@@ -93,4 +97,10 @@ $(document).ready(function()
             event.preventDefault();
         }
     });
+
+    /*************************************************
+     LOGIN MODAL VALIDATION
+     **************************************************/
+
+
 });

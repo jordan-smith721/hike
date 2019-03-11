@@ -53,7 +53,7 @@ function getHikeNames()
 {
     global $dbh;
 
-    $sql = "SELECT trailName FROM hikes";
+    $sql = "SELECT hike_id, trailName FROM hikes";
 
     $statement = $dbh->prepare($sql);
     $statement-> execute();
@@ -91,3 +91,50 @@ function getUserId($email)
     return $result;
 }
 
+function insertHike($user_id, $hike_id)
+{
+    global $dbh;
+
+    $sql = "INSERT INTO userHikes VALUES (:user_id, :hike_id)";
+
+    $statement = $dbh->prepare($sql);
+    $statement->bindParam(':user_id',$user_id,PDO::PARAM_STR);
+    $statement->bindParam(':hike_id', $hike_id,PDO::PARAM_STR);
+
+    $statement-> execute();
+}
+
+function getMember($email)
+{
+    global $dbh;
+
+    $sql = "SELECT user_id, fName, lName, email, premium FROM users WHERE email = :email";
+
+    $statement = $dbh->prepare($sql);
+
+    $statement->bindParam(':email',$email ,PDO::PARAM_STR);
+
+    $statement-> execute();
+
+    $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+    return $result;
+
+}
+
+function generateHikeTable($user_id)
+{
+    global $dbh;
+
+    $sql = "SELECT * FROM hikes h, userHikes u WHERE u.user_id = :user_id AND u.hike_id = h.hike_id ";
+
+    $statement = $dbh->prepare($sql);
+
+    $statement->bindParam(':user_id',$user_id ,PDO::PARAM_STR);
+
+    $statement-> execute();
+
+    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    return $result;
+}
