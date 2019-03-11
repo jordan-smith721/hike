@@ -24,6 +24,9 @@
             <div class="tab-pane fade show active container" id="myHikes" role="tabpanel">
                 <div class="row h-50 mx-auto" id="hikeList">
 
+                    <!--Check if the user has any hikes yet-->
+                    <check if="{{ sizeof(@tableInfo) > 0 }}">
+                    <true>
                     <!--Table-->
                     <div class="table-responsive justify-content-between">
                         <table class="table">
@@ -52,6 +55,14 @@
                             </tbody>
                         </table>
                     </div>
+                    </true>
+                    <false>
+                        <h2>You have not added any hikes yet! Add a hike below to get started.</h2>
+                    </false>
+                    </check>
+
+
+
                 </div>
 
                 <div class="row float-right">
