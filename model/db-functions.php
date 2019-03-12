@@ -1,6 +1,6 @@
 <?php
 
-require_once ('/home/jsmithgr/config.php');
+require_once ('/home/beshegre/config.php');
 
 function connect(){
     try{
@@ -135,6 +135,34 @@ function generateHikeTable($user_id)
     $statement-> execute();
 
     $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    return $result;
+}
+
+function getGoalDescriptions()
+{
+    global $dbh;
+
+    $sql = "SELECT goal_id, description FROM goals";
+
+    $statement = $dbh->prepare($sql);
+    $statement-> execute();
+    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    return $result;
+}
+
+function getGoalDetails($description)
+{
+    global $dbh;
+
+    $sql = "SELECT * FROM goals WHERE description = :description";
+
+
+    $statement = $dbh->prepare($sql);
+    $statement->bindParam(':description',$description,PDO::PARAM_STR);
+    $statement-> execute();
+    $result = $statement->fetch(PDO::FETCH_ASSOC);
 
     return $result;
 }
