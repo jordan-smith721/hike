@@ -1,25 +1,25 @@
-<div class="modal fade" id="addHikeModal" tabindex="-1" role="dialog" aria-labelledby="addHikeModalLabel" aria-hidden="true">
+<div class="modal fade" id="addGoalModal" tabindex="-1" role="dialog" aria-labelledby="addGoalModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="hikeModalLabel">Add a hike</h5>
+                <h5 class="modal-title" id="addGoalModalLabel">Add a Goal</h5>
                 <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post" id="addHikeForm" action="#">
+                <form method="post" id="addGoalForm" action="#">
                     <div class="form-group">
-                        <label for="trailName" class="col-form-label">Trail Name:</label>
-                        <select class="form-control" id="trailName" name="trailName">
-                            <repeat group="{{ @hikeNames }}" value="{{ @name }} ">
-                                <option> {{ @name['trailName'] }}</option>
+                        <label for="goals" class="col-form-label">Goals:</label>
+                        <select class="form-control" id="goals" name="goals">
+                            <repeat group="{{ @goals }}" value="{{ @goal }} ">
+                                <option> {{ @goal['description'] }}</option>
                             </repeat>
                         </select>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <input type="submit" name="addHike" value="Add Hike" class="btn btn-primary">
+                        <input type="submit" name="addHike" value="Add Goal" class="btn btn-primary">
                     </div>
                 </form>
             </div>

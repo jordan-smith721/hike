@@ -172,6 +172,10 @@ $f3->route('GET|POST /landing', function ($f3)
 {
     $hikeNames = getHikeNames();
     $f3->set('hikeNames', $hikeNames);
+
+    $goalDescriptions = getGoalDescriptions();
+    $f3->set('goals', $goalDescriptions);
+
     $member = $_SESSION['member'];
     $user_id = $member->getUserId();
 
@@ -182,6 +186,13 @@ $f3->route('GET|POST /landing', function ($f3)
         $hikeDetails = getHikeDetails($_POST['trailName']);
         $hike_id = $hikeDetails['hike_id'];
         insertHike($user_id, $hike_id);
+    }
+
+    if(isset($_POST['goals']))
+    {
+        //add goals to database
+        $goalDetails = getGoalDetails($_POST['goals']);
+        $goal_id = $goalDetails['goal_id'];
     }
 
 
