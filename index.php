@@ -193,12 +193,17 @@ $f3->route('GET|POST /landing', function ($f3)
         //add goals to database
         $goalDetails = getGoalDetails($_POST['goals']);
         $goal_id = $goalDetails['goal_id'];
+        insertGoal($user_id, $goal_id);
     }
 
 
     //get information to generate table
     $tableInfo = generateHikeTable($user_id);
     $f3->set('tableInfo', $tableInfo);
+
+    //get information to generate goals
+    $goalTableInfo = generateGoalTable($user_id);
+    $f3->set('goalTableInfo', $goalTableInfo);
 
     $template = new Template();
     echo $template->render('views/landing.html');

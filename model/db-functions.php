@@ -1,6 +1,6 @@
 <?php
 
-require_once ('/home/beshegre/config.php');
+require_once ('/home/jsmithgr/config.php');
 
 function connect(){
     try{
@@ -104,6 +104,19 @@ function insertHike($user_id, $hike_id)
     $statement-> execute();
 }
 
+function insertGoal($user_id, $goal_id)
+{
+    global $dbh;
+
+    $sql = "INSERT INTO userGoals VALUES (:user_id, :goal_id)";
+
+    $statement = $dbh->prepare($sql);
+    $statement->bindParam(':user_id',$user_id,PDO::PARAM_STR);
+    $statement->bindParam(':goal_id', $goal_id,PDO::PARAM_STR);
+
+    $statement-> execute();
+}
+
 function getMember($email)
 {
     global $dbh;
@@ -127,6 +140,23 @@ function generateHikeTable($user_id)
     global $dbh;
 
     $sql = "SELECT * FROM hikes h, userHikes u WHERE u.user_id = :user_id AND u.hike_id = h.hike_id ";
+
+    $statement = $dbh->prepare($sql);
+
+    $statement->bindParam(':user_id',$user_id ,PDO::PARAM_STR);
+
+    $statement-> execute();
+
+    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    return $result;
+}
+
+function generateGoalTable($user_id)
+{
+    global $dbh;
+
+    $sql = "SELECT * FROM goals g, userGoals u WHERE u.user_id = :user_id AND u.goal_id = g.goal_id ";
 
     $statement = $dbh->prepare($sql);
 
