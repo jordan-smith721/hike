@@ -1,0 +1,35 @@
+<div class="modal fade" id="updateGoalModal" tabindex="-1" role="dialog" aria-labelledby="updateGoalModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateGoalModalLabel">Update Goals</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="updateGoalForm" action="#">
+                    <div class="form-group">
+                        <label for="goalUpdate" class="col-form-label">Goals:</label>
+                        <select class="form-control" id="goalUpdate" name="goalUpdate">
+                            <repeat group="{{ @goalTableInfo }}" value="{{ @goal }} ">
+                                <option value="{{ @goal['goal_id'] }}"> {{ @goal['description'] }}</option>
+                            </repeat>
+                        </select>
+                        <div class="form-group mt-3">
+                            <label for="updateAmount" class="control-label">Progress Update</label>
+                            <span id="updateError" class="text-danger d-none">Please enter a number only</span>
+                            <input type="text" class="form-control" id="updateAmount" name="updateAmount">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <input type="submit" name="updateGoal" value="Update" class="btn btn-primary">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/update-goal-js.js"></script>

@@ -190,10 +190,19 @@ $f3->route('GET|POST /landing', function ($f3)
 
     if(isset($_POST['goals']))
     {
+        print_r($_POST);
         //add goals to database
         $goalDetails = getGoalDetails($_POST['goals']);
         $goal_id = $goalDetails['goal_id'];
+        echo "$user_id $goal_id";
         insertGoal($user_id, $goal_id);
+    }
+
+    if(isset($_POST['updateAmount']))
+    {
+        $updateAmount = $_POST['updateAmount'];
+        $goal_id = $_POST['goalUpdate'];
+        updateCurrentGoal($updateAmount, $user_id, $goal_id);
     }
 
 
@@ -204,6 +213,7 @@ $f3->route('GET|POST /landing', function ($f3)
     //get information to generate goals
     $goalTableInfo = generateGoalTable($user_id);
     $f3->set('goalTableInfo', $goalTableInfo);
+
 
     $template = new Template();
     echo $template->render('views/landing.html');

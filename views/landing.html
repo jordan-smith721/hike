@@ -88,7 +88,19 @@
                             <h5 class="h5">{{ @goal['description'] }}</h5>
                             <div class="progress w-100">
                                 <div id="{{ @goal['goal_id'] }}"
-                                     class="progress-bar progress-status">{{ @goal['currentGoal'] }}/{{ @goal['endGoal'] }}</div>
+                                     class="progress-bar progress-status"
+
+                                     <check if="({{@goal['currentGoal'] }} / {{ @goal['endGoal'] }} * 100) < 100">
+                                         <true>
+                                         style="width: calc( {{@goal['currentGoal'] }} / {{ @goal['endGoal'] }} * 100% ); "
+                                             >{{ @goal['currentGoal'] }}/{{ @goal['endGoal'] }}
+                                         </true>
+                                         <false>
+                                             style="width: 100%; background-color: green;"> COMPLETE
+                                         </false>
+                                     </check>
+
+                                </div>
                             </div>
                         </div>
                     </repeat>
