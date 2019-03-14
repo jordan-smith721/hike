@@ -1,6 +1,6 @@
 <?php
 
-require_once ('/home/jsmithgr/config.php');
+require_once ('/home/beshegre/config.php');
 
 function connect(){
     try{
@@ -108,7 +108,7 @@ function insertGoal($user_id, $goal_id)
 {
     global $dbh;
 
-    $sql = "INSERT INTO userGoals VALUES (:user_id, :goal_id)";
+    $sql = "INSERT INTO userGoals(user_id, goal_id) VALUES (:user_id, :goal_id)";
 
     $statement = $dbh->prepare($sql);
     $statement->bindParam(':user_id',$user_id,PDO::PARAM_STR);
