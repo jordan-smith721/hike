@@ -196,3 +196,38 @@ function getGoalDetails($description)
 
     return $result;
 }
+
+function updateCurrentGoal($updateGoal, $user_id, $goal_id)
+{
+    global $dbh;
+
+    $sql = "UPDATE userGoals SET currentGoal = currentGoal + :updateGoal FROM goals g, userGoals u 
+            WHERE u.user_id = :user_id AND u.goal_id = g.goal_id ";
+
+    $statement = $dbh->prepare($sql);
+
+    $statement->bindParam(':user_id',$user_id ,PDO::PARAM_STR);
+    $statement->bindParam(':updateGoal',$updateGoal ,PDO::PARAM_STR);
+    $statement->bindParam(':goal_id',$goal_id ,PDO::PARAM_STR);
+
+    $statement-> execute();
+    $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+    return $result;
+}
+
+function getCurrentGoal($user_id, $goal_id)
+{
+    global $dbh;
+
+    $sql = "SELECT currentGoal FROM goals g, userGoals u 
+            WHERE u.user_id = :user_id AND u.goal_id = g.goal_id ";
+
+    $statement = $dbh->prepare($sql);
+    $statement->bindParam(':user_id',$user_id ,PDO::PARAM_STR);
+    $statement->bindParam(':goal_id',$goal_id ,PDO::PARAM_STR);
+    $statement-> execute();
+    $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+    return $result;
+}
