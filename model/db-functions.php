@@ -202,7 +202,7 @@ function updateCurrentGoal($updateGoal, $user_id, $goal_id)
     global $dbh;
 
     $sql = "UPDATE userGoals SET currentGoal = currentGoal + :updateGoal FROM goals g, userGoals u 
-            WHERE u.user_id = :user_id AND u.goal_id = g.goal_id ";
+            WHERE u.user_id = :user_id AND u.goal_id = :goal_id ";
 
     $statement = $dbh->prepare($sql);
 
