@@ -42,113 +42,86 @@ $f3->route('GET|POST /', function ($f3)
         $email="";
         $password="";
 
-        if(isset($_POST['fname']))
-        {
+        if(isset($_POST['fname'])) {
             $fname = $_POST['fname'];
-            if(validName($fname))
-            {
+            if(validName($fname)) {
                 $isValid = true;
-            }
-            else
-            {
+            } else {
                 $isValid = false;
                 $f3 -> set("errors['first']","Please enter a first name");
             }
         }
 
-        if(isset($_POST['lname']))
-        {
+        if(isset($_POST['lname'])) {
             $lname = $_POST['lname'];
-            if(validName($lname))
-            {
+            if(validName($lname)) {
                 $isValid = true;
             }
-            else
-            {
+            else {
                 $isValid = false;
                 $f3->set("errors['last']", "Please enter a last name");
             }
         }
 
-        if(isset($_POST['signUpEmail']))
-        {
+        if(isset($_POST['signUpEmail'])) {
             $email = $_POST['signUpEmail'];
-            if(validEmail($email))
-            {
+            if(validEmail($email)) {
                 $isValid = true;
-            }
-            else
-            {
+            } else {
                 $isValid = false;
                 $f3->set("errors['email']","Please enter a valid email address");
             }
         }
 
-        if(isset($_POST['signPassword']))
-        {
+        if(isset($_POST['signPassword'])) {
             $password = $_POST['signPassword'];
             $confirm = $_POST['confirmPass'];
 
-            if(validPassword($password))
-            {
-                if($password != $confirm)
-                {
+            if(validPassword($password)) {
+                if($password != $confirm) {
                     $isValid = false;
                     $f3 -> set("errors['confirmPass']","Passwords do not match.");
-                }
-                else{
+                } else{
                     $password = SHA1($password);
                     $isValid = true;
                 }
-            }
-            else
-            {
+            } else {
                 $isValid = false;
                 $f3->set("errors['password']", "Password must be 8 characters long.");
             }
         }
 
-        if($isValid)
-        {
+        if($isValid) {
             insertUsers($fname,$lname,$email,$password);
 
             //create new member object
-            if(isset($_POST['premium']))
-            {
+            if(isset($_POST['premium'])) {
                 $user_id = getUserId($email);
 
                 $member = new PremiumUser($fname, $lname, $email, $user_id);
                 $_SESSION['member'] = $member;
-            }
-            else
-            {
+            } else {
                 $user_id = getUserId($email);
 
                 $member = new User($fname, $lname, $email, $user_id);
                 $_SESSION['member'] = $member;
             }
 
-
             $f3->reroute("/landing");
         }
 
         //VALIDATE LOG IN INFORMATION IS IN DATABASE
-        if(isset($_POST['email']) && isset($_POST['password']))
-        {
+        if(isset($_POST['email']) && isset($_POST['password'])) {
             $email = $_POST['email'];
             $password = $_POST['password'];
-            if(checkLogIn($email,$password))
-            {
+            if(checkLogIn($email,$password)) {
                 $member = getMember($email);
 
                 //save member into session
-                if($member['premium'] == 1)
-                {
+                if($member['premium'] == 1) {
                     $member = new PremiumUser($member['fName'], $member['lName'], $member['email'], $member['user_id']);
 
-                }
-                else
-                {
+                } else {
                     $member = new User($member['fName'], $member['lName'], $member['email'], $member['user_id']);
                 }
 
@@ -156,7 +129,6 @@ $f3->route('GET|POST /', function ($f3)
 
                 $f3->reroute("/landing");
             }
-
         }
 
     echo Template::instance()->render('views/home.html');
@@ -180,16 +152,14 @@ $f3->route('GET|POST /landing', function ($f3)
     $user_id = $member->getUserId();
 
 
-    if(isset($_POST['trailName']))
-    {
+    if(isset($_POST['trailName'])) {
         //add hike to database
         $hikeDetails = getHikeDetails($_POST['trailName']);
         $hike_id = $hikeDetails['hike_id'];
         insertHike($user_id, $hike_id);
     }
 
-    if(isset($_POST['goals']))
-    {
+    if(isset($_POST['goals'])) {
         print_r($_POST);
         //add goals to database
         $goalDetails = getGoalDetails($_POST['goals']);
@@ -198,8 +168,7 @@ $f3->route('GET|POST /landing', function ($f3)
         insertGoal($user_id, $goal_id);
     }
 
-    if(isset($_POST['updateAmount']))
-    {
+    if(isset($_POST['updateAmount'])) {
         $updateAmount = $_POST['updateAmount'];
         $goal_id = $_POST['goalUpdate'];
         updateCurrentGoal($updateAmount, $user_id, $goal_id);

@@ -2,8 +2,7 @@
 
 function validName($name)
 {
-    if(1 === preg_match('~[0-9]+~', $name) OR $name == null)
-    {
+    if(1 === preg_match('~[0-9]+~', $name) OR $name == null) {
         return false;
     }
     return true;
@@ -20,10 +19,9 @@ function validEmail($email)
 
 function validPassword($password)
 {
-    if (strlen($password) < 8)
-    {
+    if (strlen($password) < 8) {
         return false;
-    }else{
+    } else{
         return true;
     }
 }

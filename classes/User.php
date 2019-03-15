@@ -1,21 +1,20 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: brook
+ * User class that will define a user
+ * User: Brooks Eshe
  * Date: 2/27/2019
  * Time: 11:14 AM
  */
-
 class User
 {
-    
+    //fields
     private $_fname;
     private $_lname;
     private $_email;
     private $_user_id;
 
     /**
-     * User constructor.
+     * User constructor. Creates a user object to be added in an database
      * @param $_fname
      * @param $_lname
      * @param $_email
@@ -30,6 +29,8 @@ class User
     }
 
     /**
+     * Returns the user_id of the student that is created in a SQL database
+     *
      * @return mixed
      */
     public function getUserId()
@@ -37,15 +38,10 @@ class User
         return $this->_user_id;
     }
 
-    /**
-     * @param mixed $user_id
-     */
-    public function setUserId($user_id)
-    {
-        $this->_user_id = $user_id;
-    }
 
     /**
+     * Returns the name that the user signs up with
+     *
      * @return mixed
      */
     public function getFname()
@@ -53,15 +49,10 @@ class User
         return $this->_fname;
     }
 
-    /**
-     * @param mixed $fname
-     */
-    public function setFname($fname)
-    {
-        $this->_fname = $fname;
-    }
 
     /**
+     * Returns the last name that the user signs up with
+     *
      * @return mixed
      */
     public function getLname()
@@ -69,15 +60,10 @@ class User
         return $this->_lname;
     }
 
-    /**
-     * @param mixed $lname
-     */
-    public function setLname($lname)
-    {
-        $this->_lname = $lname;
-    }
 
     /**
+     * Returns the email that the user signs up with
+     *
      * @return mixed
      */
     public function getEmail()
@@ -85,12 +71,5 @@ class User
         return $this->_email;
     }
 
-    /**
-     * @param mixed $email
-     */
-    public function setEmail($email)
-    {
-        $this->_email = $email;
-    }
 
 }

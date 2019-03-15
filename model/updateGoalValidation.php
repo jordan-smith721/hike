@@ -1,10 +1,8 @@
 <?php
 $updateGoal = $_POST['updateGoal'];
 
-if(isset($updateGoal))
-{
-    if (preg_match("^[0-9]*$",$updateGoal))
-    {
+if(isset($updateGoal)) {
+    if (preg_match("^[0-9]*$",$updateGoal)) {
         return true;
     }
 
