@@ -78,7 +78,7 @@ $(document).ready(function()
     $(confirmPass).on("blur", function ()
     {
         confirmPass.removeClass("inputBoxError");
-        passwordError.removeClass("d-block");
+        confirmError.removeClass("d-block");
 
         if(confirmPass.val() != signUpPassword.val())
         {

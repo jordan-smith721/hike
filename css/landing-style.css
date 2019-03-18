@@ -35,5 +35,11 @@
     color: white;
 }
 
+.fa-minus-circle {
+    color: red;
+}
 
+#notPremium {
+    background-color: lightgray;
+}
 

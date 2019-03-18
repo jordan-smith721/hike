@@ -1,13 +1,11 @@
 <?php
-<<<<<<< HEAD
 
-require_once('/home/jsmithgr/config.php');
-=======
+
 /**
  * Require the config.php file that allows access to a database
  */
-require_once('/home/beshegre/config.php');
->>>>>>> c2b650c47223558431a86cfb12bddfc596d8a90f
+require_once('/home/jsmithgr/config.php');
+
 
 /**
  * Connects to the database

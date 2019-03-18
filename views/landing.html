@@ -33,23 +33,25 @@
                     <div class="table-responsive justify-content-between">
                         <table class="table">
                             <thead>
-                                <tr>
+                                <tr class="text-center">
                                     <th scope="col">Trail Name</th>
                                     <th scope="col">Length</th>
                                     <th scope="col">Elevation Gain</th>
                                     <th scope="col">Location</th>
                                     <th scope="col">Difficulty</th>
+                                    <th scope="col">Delete Hike</th>
                                 </tr>
                             </thead>
                             <tbody>
 
                             <repeat group="{{ @tableInfo }}" value="{{ @trail }}">
-                                <tr>
+                                <tr class="text-center">
                                     <td>{{ @trail['trailName'] }}</td>
                                     <td>{{ @trail['length'] }} Miles</td>
                                     <td>{{ @trail['elevation'] }} ft.</td>
                                     <td>{{ @trail['Location'] }}</td>
                                     <td>{{ @trail['difficulty'] }}</td>
+                                    <td class="text-center"><a href='deleteuser.php?id=$id'><span class='fas fa-minus-circle'></span></a></td>
                                 </tr>
                             </repeat>
 
@@ -80,46 +82,54 @@
             <!--Goals-->
             <div class="tab-pane fade" id="myGoals" role="tabpanel">
 
+                <check if="{{@_SESSION['member'] instanceof PremiumUser }}">
+                    <true>
+                        <div class="container w-100 h-100">
+                            <!--Progress bars-->
+                            <repeat group="{{ @goalTableInfo }}" value="{{ @goal }}">
+                                <div class="row my-3">
+                                    <h5 class="h5">{{ @goal['description'] }}</h5>
+                                    <div class="progress w-100">
+                                        <div id="{{ @goal['goal_id'] }}"
+                                             class="progress-bar progress-status"
 
+                                        <check if="({{@goal['currentGoal'] }} / {{ @goal['endGoal'] }} * 100) < 100">
+                                            <true>
+                                                style="width: calc( {{@goal['currentGoal'] }} / {{ @goal['endGoal'] }} * 100% ); "
+                                                >{{ @goal['currentGoal'] }}/{{ @goal['endGoal'] }}
+                                            </true>
+                                            <false>
+                                                style="width: 100%; background-color: green;"> COMPLETE
+                                            </false>
+                                        </check>
 
-
-                <div class="container w-100 h-100">
-                    <!--Progress bars-->
-                    <repeat group="{{ @goalTableInfo }}" value="{{ @goal }}">
-                        <div class="row my-3">
-                            <h5 class="h5">{{ @goal['description'] }}</h5>
-                            <div class="progress w-100">
-                                <div id="{{ @goal['goal_id'] }}"
-                                     class="progress-bar progress-status"
-
-                                     <check if="({{@goal['currentGoal'] }} / {{ @goal['endGoal'] }} * 100) < 100">
-                                         <true>
-                                         style="width: calc( {{@goal['currentGoal'] }} / {{ @goal['endGoal'] }} * 100% ); "
-                                             >{{ @goal['currentGoal'] }}/{{ @goal['endGoal'] }}
-                                         </true>
-                                         <false>
-                                             style="width: 100%; background-color: green;"> COMPLETE
-                                         </false>
-                                     </check>
-
+                                    </div>
                                 </div>
-                            </div>
                         </div>
-                    </repeat>
+                        </repeat>
 
-                    <!--Include add goal modal-->
-                    <include href="views/add-goal.html"></include>
-                    <div class="row float-right">
-                        <button id="btnAddGoal" type="button" class="btn btn-lg" data-toggle="modal"
-                                data-target="#addGoalModal">Add a Goal</button>
-                    </div>
-                    <include href="views/update-goal.html"></include>
-                    <div class="row">
-                        <button id="btnUpdateGoal" type="button" class="btn btn-lg" data-toggle="modal"
-                                data-target="#updateGoalModal">Update Goals</button>
-                    </div>
+                        <!--Include add goal modal-->
+                        <include href="views/add-goal.html"></include>
+                        <div class="row float-right">
+                            <button id="btnAddGoal" type="button" class="btn btn-lg" data-toggle="modal"
+                                    data-target="#addGoalModal">Add a Goal</button>
+                        </div>
+                        <include href="views/update-goal.html"></include>
+                        <div class="row">
+                            <button id="btnUpdateGoal" type="button" class="btn btn-lg" data-toggle="modal"
+                                    data-target="#updateGoalModal">Update Goals</button>
+                        </div>
 
-                </div><!--End container-->
+                        </div><!--End container-->
+                    </true>
+                    <false>
+                        <div class="card" id="notPremium">
+                            <div class="card-body text-center">
+                                <div class="card-text">You must be a premium member to access goals!</div>
+                        </div>
+                    </false>
+                </check>
+
 
             </div>
         </div><!--End content-->
