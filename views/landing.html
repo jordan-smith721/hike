@@ -51,7 +51,7 @@
                                     <td>{{ @trail['Location'] }}</td>
                                     <td>{{ @trail['difficulty'] }}</td>
                                     <td class="text-center">
-                                        <a href="{{@BASE}}/{{@user_id}}/{{@trail['hike_id']}}">
+                                        <a href="{{@BASE}}/{{@user_id}}/{{@trail['hike_id']}}" class="confirmation">
                                             <span class='fas fa-minus-circle'></span></a></td>
                                 </tr>
                             </repeat>
@@ -87,7 +87,7 @@
                             <repeat group="{{ @goalTableInfo }}" value="{{ @goal }}">
                                 <div class="row my-3">
                                     <h5 class="h5">{{ @goal['description'] }}</h5>
-                                    <a href="{{@BASE}}/{{@user_id}}/{{@goal['goal_id']}}">
+                                    <a href="{{@BASE}}/goalDelete/{{@user_id}}/{{@goal['goal_id']}}" class="confirmation">
                                         <span class='fas fa-minus-circle ml-2'></span></a>
                                     <div class="progress w-100">
                                         <div id="{{ @goal['goal_id'] }}"
@@ -133,5 +133,10 @@
         </div><!--End content-->
     </div><!--End row-->
 </div><!--End container-->
+<script>
+    $('.confirmation').on('click', function () {
+        return confirm("Are you sure you want to delete that?")
+    });
+</script>
 </body>
 </html>

@@ -217,7 +217,7 @@ $f3->route('GET /@user_id/@hike_id', function($f3, $params) {
 });
 
 //route after delete button on goal list is pressed to delete the goal
-$f3->route('GET /@user_id/@goal_id', function($f3, $params) {
+$f3->route('GET /goalDelete/@user_id/@goal_id', function($f3, $params) {
 
     $user_id = $params['user_id'];
     $goal_id = $params['goal_id'];
