@@ -51,7 +51,9 @@
                                     <td>{{ @trail['elevation'] }} ft.</td>
                                     <td>{{ @trail['Location'] }}</td>
                                     <td>{{ @trail['difficulty'] }}</td>
-                                    <td class="text-center"><a href='deleteuser.php?id=$id'><span class='fas fa-minus-circle'></span></a></td>
+                                    <td class="text-center">
+                                        <a href="{{@BASE}}/{{@user_id}}/{{@trail['hike_id']}}">
+                                            <span class='fas fa-minus-circle'></span></a></td>
                                 </tr>
                             </repeat>
 
@@ -82,6 +84,7 @@
             <!--Goals-->
             <div class="tab-pane fade" id="myGoals" role="tabpanel">
 
+                <!--Displays goals progress bars if the user is a premium member-->
                 <check if="{{@_SESSION['member'] instanceof PremiumUser }}">
                     <true>
                         <div class="container w-100 h-100">
@@ -89,20 +92,21 @@
                             <repeat group="{{ @goalTableInfo }}" value="{{ @goal }}">
                                 <div class="row my-3">
                                     <h5 class="h5">{{ @goal['description'] }}</h5>
+                                    <a href="{{@BASE}}/{{@user_id}}/{{@goal['goal_id']}}">
+                                        <span class='fas fa-minus-circle ml-2'></span></a>
                                     <div class="progress w-100">
                                         <div id="{{ @goal['goal_id'] }}"
                                              class="progress-bar progress-status"
-
                                         <check if="({{@goal['currentGoal'] }} / {{ @goal['endGoal'] }} * 100) < 100">
                                             <true>
-                                                style="width: calc( {{@goal['currentGoal'] }} / {{ @goal['endGoal'] }} * 100% ); "
+                                                style="width: calc( {{@goal['currentGoal'] }} / {{ @goal['endGoal'] }} * 100% );
+                                                background-color: #85A1D0;"
                                                 >{{ @goal['currentGoal'] }}/{{ @goal['endGoal'] }}
                                             </true>
                                             <false>
-                                                style="width: 100%; background-color: green;"> COMPLETE
+                                                style="width: 100%; background-color: #67690B;"> COMPLETE
                                             </false>
                                         </check>
-
                                     </div>
                                 </div>
                         </div>

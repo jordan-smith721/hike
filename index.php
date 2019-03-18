@@ -137,7 +137,7 @@ $f3->route('GET|POST /', function ($f3)
 $f3->route('GET|POST /test', function ($f3)
 {
     $template = new Template();
-    echo $template->render('views/testpage.html');
+    echo $template->render('views/testpage.php');
 });
 
 $f3->route('GET|POST /landing', function ($f3)
@@ -156,6 +156,7 @@ $f3->route('GET|POST /landing', function ($f3)
 
     $member = $_SESSION['member'];
     $user_id = $member->getUserId();
+    $f3->set('user_id', $user_id);
 
 
     if(isset($_POST['trailName'])) {
@@ -169,11 +170,9 @@ $f3->route('GET|POST /landing', function ($f3)
     }
 
     if(isset($_POST['goals'])) {
-        print_r($_POST);
         //add goals to database
         $goalDetails = getGoalDetails($_POST['goals']);
         $goal_id = $goalDetails['goal_id'];
-        echo "$user_id $goal_id";
         if(!(checkGoalDuplicates($user_id,$goal_id)))
         {
             insertGoal($user_id, $goal_id);
@@ -203,6 +202,29 @@ $f3->route('GET|POST /landing', function ($f3)
 $f3->route('GET /logout', function($f3) {
     $view = new View();
     $view->render('model/logout.php');
+});
+
+//route after delete button on hike table is pressed to delete the hike
+$f3->route('GET /@user_id/@hike_id', function($f3, $params) {
+
+    $user_id = $params['user_id'];
+    $hike_id = $params['hike_id'];
+
+    deleteHike($user_id, $hike_id);
+
+    $f3->reroute("landing");
+
+});
+
+//route after delete button on goal list is pressed to delete the goal
+$f3->route('GET /@user_id/@goal_id', function($f3, $params) {
+
+    $user_id = $params['user_id'];
+    $goal_id = $params['goal_id'];
+
+    deleteGoal($user_id, $goal_id);
+
+    $f3->reroute("landing");
 });
 
 

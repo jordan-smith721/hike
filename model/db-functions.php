@@ -4,7 +4,7 @@
 /**
  * Require the config.php file that allows access to a database
  */
-require_once('/home/beshegre/config.php');
+require_once('/home/jsmithgr/config.php');
 
 
 /**
@@ -302,11 +302,11 @@ function deleteGoal($user_id, $goal_id)
 
 }
 
-function deletehike($user_id, $hike_id)
+function deleteHike($user_id, $hike_id)
 {
     global $dbh;
 
-    $sql = "DELETE FROM userHikes where user_id = :user_id AND goal_id = :hike_id";
+    $sql = "DELETE FROM userHikes where user_id = :user_id AND hike_id = :hike_id";
 
     $statement = $dbh->prepare($sql);
     $statement->bindParam(':user_id', $user_id, PDO::PARAM_STR);
@@ -331,6 +331,8 @@ function checkHikeDuplicates($user_id,$hike_id)
     {
         return true;
     }
+
+    return false;
 }
 
 function checkGoalDuplicates($user_id,$goal_id)
@@ -350,4 +352,6 @@ function checkGoalDuplicates($user_id,$goal_id)
     {
         return true;
     }
+
+    return false;
 }
