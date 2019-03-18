@@ -4,7 +4,7 @@
 /**
  * Require the config.php file that allows access to a database
  */
-require_once('/home/jsmithgr/config.php');
+require_once('/home/beshegre/config.php');
 
 
 /**
@@ -287,4 +287,67 @@ function getCurrentGoal($user_id, $goal_id)
     $result = $statement->fetch(PDO::FETCH_ASSOC);
 
     return $result;
+}
+
+function deleteGoal($user_id, $goal_id)
+{
+    global $dbh;
+
+    $sql = "DELETE FROM userGoals where user_id = :user_id AND goal_id = :goal_id";
+
+    $statement = $dbh->prepare($sql);
+    $statement->bindParam(':user_id', $user_id, PDO::PARAM_STR);
+    $statement->bindParam(':goal_id', $goal_id, PDO::PARAM_STR);
+    $statement->execute();
+
+}
+
+function deletehike($user_id, $hike_id)
+{
+    global $dbh;
+
+    $sql = "DELETE FROM userHikes where user_id = :user_id AND goal_id = :hike_id";
+
+    $statement = $dbh->prepare($sql);
+    $statement->bindParam(':user_id', $user_id, PDO::PARAM_STR);
+    $statement->bindParam(':hike_id', $hike_id, PDO::PARAM_STR);
+    $statement->execute();
+}
+
+function checkHikeDuplicates($user_id,$hike_id)
+{
+    global $dbh;
+
+    $sql = "SELECT * FROM userHikes WHERE user_id = :user_id AND hike_id = :hike_id";
+
+    $statement = $dbh->prepare($sql);
+    $statement->bindParam(':user_id', $user_id, PDO::PARAM_STR);
+    $statement->bindParam(':hike_id', $hike_id, PDO::PARAM_STR);
+    $statement->execute();
+
+    $result = $statement->rowCount();
+
+    if($result >= 1 )
+    {
+        return true;
+    }
+}
+
+function checkGoalDuplicates($user_id,$goal_id)
+{
+    global $dbh;
+
+    $sql = "SELECT * FROM userGoals WHERE user_id = :user_id AND goal_id = :goal_id";
+
+    $statement = $dbh->prepare($sql);
+    $statement->bindParam(':user_id', $user_id, PDO::PARAM_STR);
+    $statement->bindParam(':goal_id', $goal_id, PDO::PARAM_STR);
+    $statement->execute();
+
+    $result = $statement->rowCount();
+
+    if($result >=1 )
+    {
+        return true;
+    }
 }

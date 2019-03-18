@@ -162,7 +162,10 @@ $f3->route('GET|POST /landing', function ($f3)
         //add hike to database
         $hikeDetails = getHikeDetails($_POST['trailName']);
         $hike_id = $hikeDetails['hike_id'];
-        insertHike($user_id, $hike_id);
+        if(!(checkHikeDuplicates($user_id,$hike_id)))
+        {
+            insertHike($user_id, $hike_id);
+        }
     }
 
     if(isset($_POST['goals'])) {
@@ -171,7 +174,10 @@ $f3->route('GET|POST /landing', function ($f3)
         $goalDetails = getGoalDetails($_POST['goals']);
         $goal_id = $goalDetails['goal_id'];
         echo "$user_id $goal_id";
-        insertGoal($user_id, $goal_id);
+        if(!(checkGoalDuplicates($user_id,$goal_id)))
+        {
+            insertGoal($user_id, $goal_id);
+        }
     }
 
     if(isset($_POST['updateAmount'])) {
