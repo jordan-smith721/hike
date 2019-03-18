@@ -1,7 +1,22 @@
 <?php
+<<<<<<< HEAD
 
 require_once('/home/jsmithgr/config.php');
+=======
+/**
+ * Require the config.php file that allows access to a database
+ */
+require_once('/home/beshegre/config.php');
+>>>>>>> c2b650c47223558431a86cfb12bddfc596d8a90f
 
+/**
+ * Connects to the database
+ *
+ * This will return true if the database was connected to successfully
+ * or false if there is some sort of error.
+ *
+ * @return bool|PDO
+ */
 function connect()
 {
     try {
@@ -13,6 +28,16 @@ function connect()
     }
 }
 
+/**
+ *
+ * Inserts users into the users table in SQL using PDO
+ *
+ * @param $fname
+ * @param $lname
+ * @param $email
+ * @param $password
+ * @return bool
+ */
 function insertUsers($fname, $lname, $email, $password)
 {
     global $dbh;
@@ -32,6 +57,13 @@ function insertUsers($fname, $lname, $email, $password)
     return $success;
 }
 
+/**
+ * Verifies that the user is already in the database before logging in.
+ *
+ * @param $email
+ * @param $password
+ * @return mixed
+ */
 function checkLogIn($email, $password)
 {
     global $dbh;
@@ -49,6 +81,11 @@ function checkLogIn($email, $password)
     return $result;
 }
 
+/**
+ * Creates an array of hike names to be displayed as a drop down menu
+ *
+ * @return array
+ */
 function getHikeNames()
 {
     global $dbh;
@@ -62,6 +99,12 @@ function getHikeNames()
     return $result;
 }
 
+/**
+ * Takes one trail name as a parameter and returns all information about that trail
+ *
+ * @param $trailName
+ * @return mixed
+ */
 function getHikeDetails($trailName)
 {
     global $dbh;
@@ -77,6 +120,12 @@ function getHikeDetails($trailName)
     return $result;
 }
 
+/**
+ * Gets the user_id of the user that is currently logged in
+ *
+ * @param $email
+ * @return mixed
+ */
 function getUserId($email)
 {
     global $dbh;
@@ -91,6 +140,12 @@ function getUserId($email)
     return $result;
 }
 
+/**
+ * Inserts a hike that is attached to the specified user.
+ *
+ * @param $user_id
+ * @param $hike_id
+ */
 function insertHike($user_id, $hike_id)
 {
     global $dbh;
@@ -104,6 +159,10 @@ function insertHike($user_id, $hike_id)
     $statement->execute();
 }
 
+/**
+ * @param $user_id
+ * @param $goal_id
+ */
 function insertGoal($user_id, $goal_id)
 {
     global $dbh;
