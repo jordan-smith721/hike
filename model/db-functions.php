@@ -1,6 +1,6 @@
 <?php
 
-require_once('/home/beshegre/config.php');
+require_once('/home/jsmithgr/config.php');
 
 function connect()
 {

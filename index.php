@@ -142,6 +142,12 @@ $f3->route('GET|POST /test', function ($f3)
 
 $f3->route('GET|POST /landing', function ($f3)
 {
+
+    if(!isset($_SESSION['member']))
+    {
+        $f3->reroute('/');
+    }
+
     $hikeNames = getHikeNames();
     $f3->set('hikeNames', $hikeNames);
 
@@ -186,6 +192,11 @@ $f3->route('GET|POST /landing', function ($f3)
 
     $template = new Template();
     echo $template->render('views/landing.html');
+});
+
+$f3->route('GET /logout', function($f3) {
+    $view = new View();
+    $view->render('model/logout.php');
 });
 
 

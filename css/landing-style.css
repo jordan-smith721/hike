@@ -1,5 +1,39 @@
 #head-img {
-    background: url("../images/hikebanner.jpg") no-repeat center center fixed;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("../images/hike-banner.jpg");
+    height: 25%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    padding: 10px;
 }
+
+#head-img h1 {
+    font-family: 'Rubik', sans-serif;
+    font-size: 4rem;
+    color: ghostwhite;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+#head-img a {
+    text-decoration: none;
+}
+
+#btnAddHike {
+    background-color:#67690B;
+    color: white;
+}
+
+#btnAddGoal {
+    background-color:#67690B;
+    color: white;
+}
+
+#btnUpdateGoal {
+    background-color:#85A1D0;
+    color: white;
+}
+
 
 
