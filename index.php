@@ -236,6 +236,14 @@ $f3->route('GET /goalDelete/@user_id/@goal_id', function($f3, $params) {
     $f3->reroute("landing");
 });
 
+//route for checkLogin AJAX call
+$f3->route('GET|POST /checkLogIn.php', function($f3)
+{
+    $view = new View();
+    echo $view->render('model/checkLogIn.php');
+});
+
+
 
 
 //Run fat free

@@ -29,12 +29,6 @@ $(updateGoalForm).on("submit", function()
         $.post('updateGoalValidation.php',
             {updateGoal: updateValue}
         );
-
-        var selectedGoal = $('#goalUpdate').val();
-        var progressBar = $(selectedGoal);
-
-
-
     }
 
 });

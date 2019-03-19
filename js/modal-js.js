@@ -102,5 +102,67 @@ $(document).ready(function()
      LOGIN MODAL VALIDATION
      **************************************************/
 
+    var loginEmailForm = $("#email");
+    var loginPasswordForm = $("#password");
+    var loginEmailErr = $("#loginEmailErr");
+    var loginPassErr = $("#loginPassErr");
 
+    //validate email box on blur
+    $(loginEmailForm).on("blur", function ()
+    {
+        loginEmailForm.removeClass("inputBoxError");
+        loginEmailErr.removeClass("d-block");
+
+        //if field is not an email address make it an error
+        var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (regex.test(loginEmailForm.val()) == false)
+        {
+            loginEmailForm.addClass("inputBoxError");
+            loginEmailErr.addClass("d-block");
+        }
+    });
+
+    //validate password is not empty
+    $(loginPasswordForm).on("blur", function ()
+    {
+        loginPasswordForm.removeClass("inputBoxError");
+        loginPassErr.removeClass("d-block");
+
+        if(loginPasswordForm.val().length == 0)
+        {
+            loginPasswordForm.addClass("inputBoxError");
+            loginPassErr.addClass("d-block");
+        }
+    });
+
+    //validate that the user exists on login
+    var loginForm = $("#loginForm");
+    $(loginForm).on("submit", function(e)
+    {
+        //don't submit the form
+        e.preventDefault();
+
+        var loginEmail = $("#email").val();
+        var loginPass = $("#password").val();
+
+        //send data to validation form
+        $.post(
+            'checkLogIn.php',
+            {loginEmail: loginEmail,
+             loginPass: loginPass},
+             function(result)
+             {
+                 //if it is a valid user submit the form
+                 if(result == "success")
+                 {
+                     $("invalidLogin").removeClass("d-block");
+                     $(loginForm).unbind().submit();
+                 }
+                 //display an error if the login is not valid
+                 else
+                 {
+                    $("#invalidLogin").addClass("d-block");
+                 }
+             });
+    })
 });

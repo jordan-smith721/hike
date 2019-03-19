@@ -4,7 +4,7 @@
 /**
  * Require the config.php file that allows access to a database
  */
-require_once('/home/beshegre/config.php');
+require_once('/home/jsmithgr/config.php');
 
 
 /**
