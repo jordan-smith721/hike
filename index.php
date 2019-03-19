@@ -41,6 +41,7 @@ $f3->route('GET|POST /', function ($f3)
         $lname="";
         $email="";
         $password="";
+        $premiumMember = "";
 
         if(isset($_POST['fname'])) {
             $fname = $_POST['fname'];
@@ -90,9 +91,17 @@ $f3->route('GET|POST /', function ($f3)
                 $f3->set("errors['password']", "Password must be 8 characters long.");
             }
         }
+        if(isset($_POST['premium']))
+        {
+            $premiumMember = 1;
+        }
+        else
+        {
+            $premiumMember = 0;
+        }
 
         if($isValid) {
-            insertUsers($fname,$lname,$email,$password);
+            insertUsers($fname,$lname,$email,$password, $premiumMember);
 
             //create new member object
             if(isset($_POST['premium'])) {

@@ -4,7 +4,7 @@
 /**
  * Require the config.php file that allows access to a database
  */
-require_once('/home/jsmithgr/config.php');
+require_once('/home/beshegre/config.php');
 
 
 /**
@@ -36,12 +36,12 @@ function connect()
  * @param $password
  * @return bool
  */
-function insertUsers($fname, $lname, $email, $password)
+function insertUsers($fname, $lname, $email, $password, $premiumMember)
 {
     global $dbh;
 
-    $sql = "INSERT INTO users(fName, lName, email, password)
-                        VALUES(:fName, :lName, :email, :password)";
+    $sql = "INSERT INTO users(fName, lName, email, password, premium)
+                        VALUES(:fName, :lName, :email, :password, :premiumMember)";
 
     $statement = $dbh->prepare($sql);
 
@@ -50,6 +50,7 @@ function insertUsers($fname, $lname, $email, $password)
     $statement->bindParam(':lName', $lname, PDO::PARAM_STR);
     $statement->bindParam(':email', $email, PDO::PARAM_STR);
     $statement->bindParam(':password', $password, PDO::PARAM_STR);
+    $statement->bindParam(':premiumMember', $premiumMember, PDO::PARAM_STR);
 
     $success = $statement->execute();
     return $success;
