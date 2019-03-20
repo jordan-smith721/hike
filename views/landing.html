@@ -22,8 +22,8 @@
         <!--Tabs-->
         <div class="tab-content w-100" id="tabContent">
             <!--Hike tracking-->
-            <div class="tab-pane fade show active container" id="myHikes" role="tabpanel">
-                <div class="row h-50 mx-auto" id="hikeList">
+            <div class="tab-pane fade show active" id="myHikes" role="tabpanel">
+                <div class="row mx-auto" id="hikeList">
 
                     <!--Check if the user has any hikes yet-->
                     <check if="{{ sizeof(@tableInfo) > 0 }}">
@@ -66,8 +66,8 @@
                     </check>
                 </div>
 
-                <div class="row float-right">
-                    <button id="btnAddHike" type="button" class="btn  btn-lg btn-block align-bottom" data-toggle="modal"
+                <div class="row float-sm-right">
+                    <button id="btnAddHike" type="button" class="btn  btn-lg btn-block align-bottom text-center text-sm-right mt-2" data-toggle="modal"
                             data-target="#addHikeModal">Add a Hike</button>
                 </div>
 
@@ -109,13 +109,13 @@
 
                         <!--Include add goal modal-->
                         <include href="views/add-goal.html"></include>
-                        <div class="row float-right">
-                            <button id="btnAddGoal" type="button" class="btn btn-lg" data-toggle="modal"
+                        <div class="row text-center float-sm-right">
+                            <button id="btnAddGoal" type="button" class="btn btn-lg btn-block align-bottom mt-2" data-toggle="modal"
                                     data-target="#addGoalModal">Add a Goal</button>
                         </div>
                         <include href="views/update-goal.html"></include>
-                        <div class="row">
-                            <button id="btnUpdateGoal" type="button" class="btn btn-lg" data-toggle="modal"
+                        <div class="row text-center float-sm-left">
+                            <button id="btnUpdateGoal" type="button" class="btn btn-lg btn-block align-bottom mt-2" data-toggle="modal"
                                     data-target="#updateGoalModal">Update Goals</button>
                         </div>
 

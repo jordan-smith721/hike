@@ -1,4 +1,3 @@
-
 $("#updateAmount").on("blur", function(){
     var updateValue = $("#updateAmount").val();
     var updateBox = $("#updateAmount");
@@ -8,6 +7,7 @@ $("#updateAmount").on("blur", function(){
     updateBox.removeClass("inputBoxError");
     updateError.removeClass("d-block");
 
+    //check if update value box is numbers only
     if(updateValue == "" || !(/^[0-9]*$/.test(updateValue)))
     {
         updateBox.addClass("inputBoxError");
@@ -16,6 +16,7 @@ $("#updateAmount").on("blur", function(){
     }
 });
 
+//check that update is valid on server side
 var updateGoalForm = $('#updateGoalForm');
 $(updateGoalForm).on("submit", function()
 {

@@ -35,7 +35,7 @@ The js directory contains Javascript validation and index.php contains server
 side validation. 
 
 9. Incorporates jQuery and Ajax.
-Ajax and Jquery can be found in the js/update-goal-js.js
+Ajax and Jquery can be found in the js/update-goal-js.js and js/modal-js.js
 
 BONUS:  Utilizes an API (Note:  If you do use an API, be sure to talk about it in your presentation.)
 API was not used. 

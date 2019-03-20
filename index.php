@@ -6,7 +6,6 @@
  * Time: 9:28 AM
  */
 
-
 //Turn on error reporting
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
@@ -34,7 +33,6 @@ require_once('model/validation.php');
 //Define a default route
 $f3->route('GET|POST /', function ($f3)
 {
-
     //VALIDATE SIGN UP FORM
         $isValid = false;
         $fname="";
@@ -43,6 +41,7 @@ $f3->route('GET|POST /', function ($f3)
         $password="";
         $premiumMember = "";
 
+        //validate first name
         if(isset($_POST['fname'])) {
             $fname = $_POST['fname'];
             if(validName($fname)) {
@@ -53,17 +52,18 @@ $f3->route('GET|POST /', function ($f3)
             }
         }
 
+        //validate last name
         if(isset($_POST['lname'])) {
             $lname = $_POST['lname'];
             if(validName($lname)) {
                 $isValid = true;
-            }
-            else {
+            } else {
                 $isValid = false;
                 $f3->set("errors['last']", "Please enter a last name");
             }
         }
 
+        //validate email
         if(isset($_POST['signUpEmail'])) {
             $email = $_POST['signUpEmail'];
             if(validEmail($email)) {
@@ -74,6 +74,7 @@ $f3->route('GET|POST /', function ($f3)
             }
         }
 
+        //validate password and confirm password
         if(isset($_POST['signPassword'])) {
             $password = $_POST['signPassword'];
             $confirm = $_POST['confirmPass'];
@@ -91,15 +92,14 @@ $f3->route('GET|POST /', function ($f3)
                 $f3->set("errors['password']", "Password must be 8 characters long.");
             }
         }
-        if(isset($_POST['premium']))
-        {
+        //set user to premium if they choose that option
+        if(isset($_POST['premium'])){
             $premiumMember = 1;
-        }
-        else
-        {
+        } else{
             $premiumMember = 0;
         }
 
+        //create the user if data is valid
         if($isValid) {
             insertUsers($fname,$lname,$email,$password, $premiumMember);
 
@@ -143,20 +143,16 @@ $f3->route('GET|POST /', function ($f3)
     echo Template::instance()->render('views/home.html');
 });
 
-$f3->route('GET|POST /test', function ($f3)
-{
-    $template = new Template();
-    echo $template->render('views/testpage.php');
-});
-
+//route to landing page
 $f3->route('GET|POST /landing', function ($f3)
 {
 
-    if(!isset($_SESSION['member']))
-    {
+    //reroute to home page if not logged in
+    if(!isset($_SESSION['member'])){
         $f3->reroute('/');
     }
 
+    //set variables for templates
     $hikeNames = getHikeNames();
     $f3->set('hikeNames', $hikeNames);
 
@@ -168,6 +164,7 @@ $f3->route('GET|POST /landing', function ($f3)
     $f3->set('user_id', $user_id);
 
 
+    //add hike to database
     if(isset($_POST['trailName'])) {
         //add hike to database
         $hikeDetails = getHikeDetails($_POST['trailName']);
@@ -178,6 +175,7 @@ $f3->route('GET|POST /landing', function ($f3)
         }
     }
 
+    //add goal to database
     if(isset($_POST['goals'])) {
         //add goals to database
         $goalDetails = getGoalDetails($_POST['goals']);
@@ -188,6 +186,7 @@ $f3->route('GET|POST /landing', function ($f3)
         }
     }
 
+    //update goal status
     if(isset($_POST['updateAmount'])) {
         $updateAmount = $_POST['updateAmount'];
         $goal_id = $_POST['goalUpdate'];
@@ -208,6 +207,7 @@ $f3->route('GET|POST /landing', function ($f3)
     echo $template->render('views/landing.html');
 });
 
+//route for logout button
 $f3->route('GET /logout', function($f3) {
     $view = new View();
     $view->render('model/logout.php');
@@ -242,9 +242,6 @@ $f3->route('GET|POST /checkLogIn.php', function($f3)
     $view = new View();
     echo $view->render('model/checkLogIn.php');
 });
-
-
-
 
 //Run fat free
 $f3->run();

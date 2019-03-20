@@ -19,6 +19,7 @@ $(document).ready(function()
      SIGNUP MODAL VALIDATION
     **************************************************/
 
+    //check that first name box is not empty and only contains letters
     $(fname).on("blur", function ()
     {
         isValid = true;
@@ -33,6 +34,7 @@ $(document).ready(function()
         }
     });
 
+    //check that last name box is not empty and only contains letters
     $(lname).on("blur", function ()
     {
         lname.removeClass("inputBoxError");
@@ -46,6 +48,7 @@ $(document).ready(function()
         }
     });
 
+    //check that email box contains a valid email
     $(signUpEmail).on("blur", function ()
     {
         signUpEmail.removeClass("inputBoxError");
@@ -61,6 +64,7 @@ $(document).ready(function()
         }
     });
 
+    //check that password is 8 or more characters
     $(signUpPassword).on("blur", function ()
     {
         signUpPassword.removeClass("inputBoxError");
@@ -75,6 +79,7 @@ $(document).ready(function()
 
     });
 
+    //check that confirm password matches password
     $(confirmPass).on("blur", function ()
     {
         confirmPass.removeClass("inputBoxError");
@@ -89,6 +94,7 @@ $(document).ready(function()
         }
     });
 
+    //if data is not valid don't submit the form
     var signupForm = $('#signupForm');
     $(signupForm).on("submit", function()
     {
@@ -128,6 +134,8 @@ $(document).ready(function()
         loginPasswordForm.removeClass("inputBoxError");
         loginPassErr.removeClass("d-block");
 
+
+        //if password is empty add error
         if(loginPasswordForm.val().length == 0)
         {
             loginPasswordForm.addClass("inputBoxError");

@@ -159,6 +159,8 @@ function insertHike($user_id, $hike_id)
 }
 
 /**
+ * Inserts a new goal into the users database
+ *
  * @param $user_id
  * @param $goal_id
  */
@@ -175,6 +177,12 @@ function insertGoal($user_id, $goal_id)
     $statement->execute();
 }
 
+/**
+ * Gets the member details based on a member email
+ *
+ * @param $email
+ * @return mixed
+ */
 function getMember($email)
 {
     global $dbh;
@@ -193,6 +201,12 @@ function getMember($email)
 
 }
 
+/**
+ * Gets all of the hike data for a specific user
+ *
+ * @param $user_id
+ * @return array
+ */
 function generateHikeTable($user_id)
 {
     global $dbh;
@@ -210,6 +224,12 @@ function generateHikeTable($user_id)
     return $result;
 }
 
+/**
+ * Gets all the goal information for a specific user
+ *
+ * @param $user_id
+ * @return array
+ */
 function generateGoalTable($user_id)
 {
     global $dbh;
@@ -227,6 +247,11 @@ function generateGoalTable($user_id)
     return $result;
 }
 
+/**
+ * Gets the description(name) of all hikes
+ *
+ * @return array
+ */
 function getGoalDescriptions()
 {
     global $dbh;
@@ -240,6 +265,12 @@ function getGoalDescriptions()
     return $result;
 }
 
+/**
+ * Gets the details for a specific hike
+ *
+ * @param $description
+ * @return mixed
+ */
 function getGoalDetails($description)
 {
     global $dbh;
@@ -255,6 +286,14 @@ function getGoalDetails($description)
     return $result;
 }
 
+/**
+ * Updates the current amount the user has achieved towards a certain goal
+ *
+ * @param $updateGoal
+ * @param $user_id
+ * @param $goal_id
+ * @return mixed
+ */
 function updateCurrentGoal($updateGoal, $user_id, $goal_id)
 {
     global $dbh;
@@ -274,6 +313,13 @@ function updateCurrentGoal($updateGoal, $user_id, $goal_id)
     return $result;
 }
 
+/**
+ * Gets the current amount a user has achieved towards a certain goal
+ *
+ * @param $user_id
+ * @param $goal_id
+ * @return mixed
+ */
 function getCurrentGoal($user_id, $goal_id)
 {
     global $dbh;
@@ -290,6 +336,12 @@ function getCurrentGoal($user_id, $goal_id)
     return $result;
 }
 
+/**
+ * Deletes a goal from the users database
+ *
+ * @param $user_id
+ * @param $goal_id
+ */
 function deleteGoal($user_id, $goal_id)
 {
     global $dbh;
@@ -303,6 +355,13 @@ function deleteGoal($user_id, $goal_id)
 
 }
 
+
+/**
+ * Deletes a hike from the users database
+ *
+ * @param $user_id
+ * @param $hike_id
+ */
 function deleteHike($user_id, $hike_id)
 {
     global $dbh;
@@ -315,6 +374,13 @@ function deleteHike($user_id, $hike_id)
     $statement->execute();
 }
 
+/**
+ * Checks if a hike has already been added to the database
+ *
+ * @param $user_id
+ * @param $hike_id
+ * @return bool
+ */
 function checkHikeDuplicates($user_id,$hike_id)
 {
     global $dbh;
@@ -336,6 +402,13 @@ function checkHikeDuplicates($user_id,$hike_id)
     return false;
 }
 
+/**
+ * Checks if a goal has already been added to the database
+ *
+ * @param $user_id
+ * @param $goal_id
+ * @return bool
+ */
 function checkGoalDuplicates($user_id,$goal_id)
 {
     global $dbh;
