@@ -1,3 +1,14 @@
 .inputBoxError {
     border: 1px solid red;
 }
+
+.btn-green {
+    background-color:#67690B;
+    color: white;
+}
+
+.btn-blue {
+    background-color:#85A1D0;
+    color: white;
+}
+

@@ -20,21 +20,6 @@
     text-decoration: none;
 }
 
-#btnAddHike {
-    background-color:#67690B;
-    color: white;
-}
-
-#btnAddGoal {
-    background-color:#67690B;
-    color: white;
-}
-
-#btnUpdateGoal {
-    background-color:#85A1D0;
-    color: white;
-}
-
 .fa-minus-circle {
     color: red;
 }
